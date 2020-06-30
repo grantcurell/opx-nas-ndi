@@ -23,7 +23,7 @@
 #include "std_assert.h"
 #include "nas_ndi_event_logs.h"
 #include "nas_ndi_utils.h"
-#include "dell-base-hash.h"
+#include "dell-base-switch-element.h"
 
 #include "sai.h"
 #include "saiswitch.h"
@@ -43,28 +43,28 @@ int32_t nas_ndi_translate_traffic (int32_t nas_traffic)
     int32_t sai_traffic = -1;
 
     switch(nas_traffic) {
-    case BASE_TRAFFIC_HASH_TRAFFIC_ECMP_NON_IP:
+    case BASE_SWITCH_TRAFFIC_ECMP_NON_IP:
         sai_traffic = SAI_SWITCH_ATTR_ECMP_HASH;
         break;
-    case BASE_TRAFFIC_HASH_TRAFFIC_LAG_NON_IP:
+    case BASE_SWITCH_TRAFFIC_LAG_NON_IP:
         sai_traffic = SAI_SWITCH_ATTR_LAG_HASH;
         break;
-    case BASE_TRAFFIC_HASH_TRAFFIC_ECMP_IPV4:
+    case BASE_SWITCH_TRAFFIC_ECMP_IPV4:
         sai_traffic = SAI_SWITCH_ATTR_ECMP_HASH_IPV4;
         break;
-    case BASE_TRAFFIC_HASH_TRAFFIC_ECMP_IPV4_IN_IPV4:
+    case BASE_SWITCH_TRAFFIC_ECMP_IPV4_IN_IPV4:
         sai_traffic = SAI_SWITCH_ATTR_ECMP_HASH_IPV4_IN_IPV4;
         break;
-    case BASE_TRAFFIC_HASH_TRAFFIC_ECMP_IPV6:
+    case BASE_SWITCH_TRAFFIC_ECMP_IPV6:
         sai_traffic = SAI_SWITCH_ATTR_ECMP_HASH_IPV6;
         break;
-    case BASE_TRAFFIC_HASH_TRAFFIC_LAG_IPV4:
+    case BASE_SWITCH_TRAFFIC_LAG_IPV4:
         sai_traffic = SAI_SWITCH_ATTR_LAG_HASH_IPV4;
         break;
-    case BASE_TRAFFIC_HASH_TRAFFIC_LAG_IPV4_IN_IPV4:
+    case BASE_SWITCH_TRAFFIC_LAG_IPV4_IN_IPV4:
         sai_traffic = SAI_SWITCH_ATTR_LAG_HASH_IPV4_IN_IPV4;
         break;
-    case BASE_TRAFFIC_HASH_TRAFFIC_LAG_IPV6:
+    case BASE_SWITCH_TRAFFIC_LAG_IPV6:
         sai_traffic = SAI_SWITCH_ATTR_LAG_HASH_IPV6;
         break;
     default:
@@ -83,40 +83,40 @@ int32_t nas_ndi_translate_nas_field (int32_t nas_field)
     int32_t sai_field = -1;
 
     switch(nas_field) {
-    case BASE_TRAFFIC_HASH_FIELD_SRC_IP:
+    case BASE_SWITCH_FIELD_SRC_IP:
         sai_field = SAI_NATIVE_HASH_FIELD_SRC_IP;
         break;
-    case BASE_TRAFFIC_HASH_FIELD_DEST_IP:
+    case BASE_SWITCH_FIELD_DEST_IP:
         sai_field = SAI_NATIVE_HASH_FIELD_DST_IP;
         break;
-    case BASE_TRAFFIC_HASH_FIELD_INNER_SRC_IP:
+    case BASE_SWITCH_FIELD_INNER_SRC_IP:
         sai_field = SAI_NATIVE_HASH_FIELD_INNER_SRC_IP;
         break;
-    case BASE_TRAFFIC_HASH_FIELD_INNER_DST_IP:
+    case BASE_SWITCH_FIELD_INNER_DST_IP:
         sai_field = SAI_NATIVE_HASH_FIELD_INNER_DST_IP;
         break;
-    case BASE_TRAFFIC_HASH_FIELD_VLAN_ID:
+    case BASE_SWITCH_FIELD_VLAN_ID:
         sai_field = SAI_NATIVE_HASH_FIELD_VLAN_ID;
         break;
-    case BASE_TRAFFIC_HASH_FIELD_IP_PROTOCOL:
+    case BASE_SWITCH_FIELD_IP_PROTOCOL:
         sai_field = SAI_NATIVE_HASH_FIELD_IP_PROTOCOL;
         break;
-    case BASE_TRAFFIC_HASH_FIELD_ETHERTYPE:
+    case BASE_SWITCH_FIELD_ETHERTYPE:
         sai_field = SAI_NATIVE_HASH_FIELD_ETHERTYPE;
         break;
-    case BASE_TRAFFIC_HASH_FIELD_L4_SRC_PORT:
+    case BASE_SWITCH_FIELD_L4_SRC_PORT:
         sai_field = SAI_NATIVE_HASH_FIELD_L4_SRC_PORT;
         break;
-    case BASE_TRAFFIC_HASH_FIELD_L4_DEST_PORT:
+    case BASE_SWITCH_FIELD_L4_DEST_PORT:
         sai_field = SAI_NATIVE_HASH_FIELD_L4_DST_PORT;
         break;
-    case BASE_TRAFFIC_HASH_FIELD_SRC_MAC:
+    case BASE_SWITCH_FIELD_SRC_MAC:
         sai_field = SAI_NATIVE_HASH_FIELD_SRC_MAC;
         break;
-    case BASE_TRAFFIC_HASH_FIELD_DEST_MAC:
+    case BASE_SWITCH_FIELD_DEST_MAC:
         sai_field = SAI_NATIVE_HASH_FIELD_DST_MAC;
         break;
-    case BASE_TRAFFIC_HASH_FIELD_IN_PORT:
+    case BASE_SWITCH_FIELD_IN_PORT:
         sai_field = SAI_NATIVE_HASH_FIELD_IN_PORT;
         break;
     default:
@@ -136,40 +136,40 @@ int32_t nas_ndi_translate_sai_field (int32_t sai_field)
 
     switch(sai_field) {
     case SAI_NATIVE_HASH_FIELD_SRC_IP:
-        nas_field = BASE_TRAFFIC_HASH_FIELD_SRC_IP;
+        nas_field = BASE_SWITCH_FIELD_SRC_IP;
         break;
     case SAI_NATIVE_HASH_FIELD_DST_IP:
-        nas_field = BASE_TRAFFIC_HASH_FIELD_DEST_IP;
+        nas_field = BASE_SWITCH_FIELD_DEST_IP;
         break;
     case SAI_NATIVE_HASH_FIELD_INNER_SRC_IP:
-        nas_field = BASE_TRAFFIC_HASH_FIELD_INNER_SRC_IP;
+        nas_field = BASE_SWITCH_FIELD_INNER_SRC_IP;
         break;
     case SAI_NATIVE_HASH_FIELD_INNER_DST_IP:
-        nas_field = BASE_TRAFFIC_HASH_FIELD_INNER_DST_IP;
+        nas_field = BASE_SWITCH_FIELD_INNER_DST_IP;
         break;
     case SAI_NATIVE_HASH_FIELD_VLAN_ID:
-        nas_field = BASE_TRAFFIC_HASH_FIELD_VLAN_ID;
+        nas_field = BASE_SWITCH_FIELD_VLAN_ID;
         break;
     case SAI_NATIVE_HASH_FIELD_IP_PROTOCOL:
-        nas_field = BASE_TRAFFIC_HASH_FIELD_IP_PROTOCOL;
+        nas_field = BASE_SWITCH_FIELD_IP_PROTOCOL;
         break;
     case SAI_NATIVE_HASH_FIELD_ETHERTYPE:
-        nas_field = BASE_TRAFFIC_HASH_FIELD_ETHERTYPE;
+        nas_field = BASE_SWITCH_FIELD_ETHERTYPE;
         break;
     case SAI_NATIVE_HASH_FIELD_L4_SRC_PORT:
-        nas_field = BASE_TRAFFIC_HASH_FIELD_L4_SRC_PORT;
+        nas_field = BASE_SWITCH_FIELD_L4_SRC_PORT;
         break;
     case SAI_NATIVE_HASH_FIELD_L4_DST_PORT:
-        nas_field = BASE_TRAFFIC_HASH_FIELD_L4_DEST_PORT;
+        nas_field = BASE_SWITCH_FIELD_L4_DEST_PORT;
         break;
     case SAI_NATIVE_HASH_FIELD_SRC_MAC:
-        nas_field = BASE_TRAFFIC_HASH_FIELD_SRC_MAC;
+        nas_field = BASE_SWITCH_FIELD_SRC_MAC;
         break;
     case SAI_NATIVE_HASH_FIELD_DST_MAC:
-        nas_field = BASE_TRAFFIC_HASH_FIELD_DEST_MAC;
+        nas_field = BASE_SWITCH_FIELD_DEST_MAC;
         break;
     case SAI_NATIVE_HASH_FIELD_IN_PORT:
-        nas_field = BASE_TRAFFIC_HASH_FIELD_IN_PORT;
+        nas_field = BASE_SWITCH_FIELD_IN_PORT;
         break;
     default:
         /* This cannot happen */
@@ -265,8 +265,8 @@ t_std_error nas_ndi_create_all_hash_objects (void)
      * SAI_SWITCH_ATTR_LAG_HASH, so we must create hash objects for the
      * remaining supported traffic types.
      */
-    for (nas_traffic = BASE_TRAFFIC_HASH_TRAFFIC_ECMP_IPV4;
-         nas_traffic <= BASE_TRAFFIC_HASH_TRAFFIC_LAG_IPV6;
+    for (nas_traffic = BASE_SWITCH_TRAFFIC_ECMP_IPV4;
+         nas_traffic <= BASE_SWITCH_TRAFFIC_LAG_IPV6;
          nas_traffic++) {
         rc = nas_ndi_create_hash_object(nas_ndi_translate_traffic(nas_traffic),
                                         sai_switch_api,
@@ -294,7 +294,7 @@ t_std_error nas_ndi_set_hash_obj (uint32_t nas_traffic, uint32_t count,
     uint32_t          attr_count = 1;
     sai_attribute_t   hash_attr, switch_attr;
     sai_status_t      status;
-    int32_t           s32list[BASE_TRAFFIC_HASH_FIELD_MAX];
+    int32_t           s32list[BASE_SWITCH_FIELD_MAX];
     uint32_t          i, j = 0;
 
 
@@ -365,7 +365,7 @@ t_std_error nas_ndi_get_hash (uint64_t nas_traffic, uint32_t *count, uint32_t *l
     uint32_t          attr_count = 1;
     sai_attribute_t   hash_attr, switch_attr;
     sai_status_t      status;
-    int32_t           s32list[BASE_TRAFFIC_HASH_FIELD_MAX] = {-1};
+    int32_t           s32list[BASE_SWITCH_FIELD_MAX] = {-1};
     uint32_t          i;
 
     /*
@@ -403,7 +403,7 @@ t_std_error nas_ndi_get_hash (uint64_t nas_traffic, uint32_t *count, uint32_t *l
      * Call the SAI GET_ATTRIBUTE function for the standard fields
      */
     hash_attr.id = SAI_HASH_ATTR_NATIVE_HASH_FIELD_LIST;
-    hash_attr.value.s32list.count = BASE_TRAFFIC_HASH_FIELD_MAX;
+    hash_attr.value.s32list.count = BASE_SWITCH_FIELD_MAX;
     hash_attr.value.s32list.list = s32list;
 
     status = sai_hash_api_tbl->get_hash_attribute(switch_attr.value.oid,
